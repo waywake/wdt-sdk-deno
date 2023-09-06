@@ -6,9 +6,9 @@ const client = new Client({
     customerId: "",
     appKey: "",
     appSecret: "",
-    qmAppKey: "",
-    qmAppSecret: "",
-    qmTargetAppKey: "",
+    qimenAppKey: "",
+    qimenAppSecret: "",
+    qimenTargetAppKey: "",
     url: "",
 });
 

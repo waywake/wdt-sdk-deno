@@ -6,9 +6,9 @@ export interface WdtQimenClientOptions {
     customerId: string;
     appKey: string;
     appSecret: string;
-    qmTargetAppKey: string;
-    qmAppKey: string;
-    qmAppSecret: string;
+    qimenTargetAppKey: string;
+    qimenAppKey: string;
+    qimenAppSecret: string;
 }
 
 export class WdtQimenClient {
@@ -28,10 +28,10 @@ export class WdtQimenClient {
         [this.secret, this.salt] = options.appSecret.split(":");
 
         this.topClient = new TopClient({
-            appKey: options.qmAppKey,
-            appSecret: options.qmAppSecret,
+            appKey: options.qimenAppKey,
+            appSecret: options.qimenAppSecret,
             url: options.url || "http://3ldsmu02o9.api.taobao.com/router/qm",
-            targetAppKey: options.qmTargetAppKey,
+            targetAppKey: options.qimenTargetAppKey,
         });
     }
 
