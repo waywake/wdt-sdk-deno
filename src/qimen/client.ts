@@ -43,14 +43,16 @@ export class WdtQimenClient {
         request.setCustomerId(this.sid);
 
         const req = request.format(this.secret);
-        const {
-            response: { data, status, message },
-        } = await this.topClient.execute(req, ["response"]);
+        const { response } = await this.topClient.execute(req, ["response"]);
 
-        if (status != 0) {
-            throw new Error(`Call wdt qimen error: ${message} (${status})`);
+        if (response?.status != 0) {
+            throw new Error(
+                `Call wdt qimen error: ${response.message} (${JSON.stringify(
+                    response
+                )})`
+            );
         }
 
-        return data;
+        return response.data;
     }
 }
