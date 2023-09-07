@@ -3,6 +3,7 @@ import {
     crypto,
     toHashString,
 } from "https://deno.land/std@0.201.0/crypto/mod.ts";
+import { KeyStack } from "https://deno.land/std@0.201.0/crypto/keystack.ts";
 
 const QI_MEN_EXCLUDE_SIGN_FIELDS = ["wdt3_customer_id", "wdt_sign"];
 
@@ -96,19 +97,15 @@ export class WdtQimenRequest {
     }
 
     format(secret: string) {
-        const args: Record<string, unknown> = {};
+        const args: Record<string, string> = {};
 
         args["wdt_sign"] = this.isOfficial
             ? this.officialSign(secret)
             : this.customSign(secret);
 
-        for (const key of Object.keys(this.data)) {
-            if (typeof this.data[key] === "object") {
-                args[key] = JSON.stringify(this.data[key]);
-            } else {
-                args[key] = this.data[key];
-            }
-        }
+        Object.entries(this.data).forEach(([Key, val]) => {
+            args[Key] = typeof val === "string" ? val : JSON.stringify(val);
+        });
 
         return args;
     }
