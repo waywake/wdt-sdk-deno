@@ -1,5 +1,5 @@
 import { WdtQimenRequest } from "./models.ts";
-import { TopClient } from "https://deno.land/x/ali_top_client@0.3.0/mod.ts";
+import { TopClient } from "https://deno.land/x/ali_top_client@0.4.0/mod.ts";
 
 export { TopClient };
 
