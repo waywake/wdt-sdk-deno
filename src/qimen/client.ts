@@ -1,5 +1,7 @@
 import { WdtQimenRequest } from "./models.ts";
-import { TopClient } from "https://deno.land/x/ali_top_client@0.2.0/mod.ts";
+import { TopClient } from "https://deno.land/x/ali_top_client@0.3.0/mod.ts";
+
+export { TopClient };
 
 export interface WdtQimenClientOptions {
     url?: string;
@@ -40,9 +42,15 @@ export class WdtQimenClient {
         request.setAppKey(this.appKey);
         request.setCustomerId(this.sid);
 
-        const data = request.format(this.secret);
-        const result = await this.topClient.execute(request.method, data);
+        const req = request.format(this.secret);
+        const {
+            response: { data, status, message },
+        } = await this.topClient.execute(req, ["response"]);
 
-        return result;
+        if (status != 0) {
+            throw new Error(`Call wdt qimen error: ${message} (${status})`);
+        }
+
+        return data;
     }
 }

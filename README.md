@@ -2,6 +2,8 @@
 
 ## 使用方式
 
+**旺店通旗舰版**
+
 ``` typescript
 import { WdtUltimateClient, WdtUltimatePager } from "https://deno.land/wdt_sdk/@0.2.0/mod.ts";
 
@@ -16,8 +18,10 @@ await client.call("sales.RawTrade.pushSelf", [{}, {}]);
 await client.pageCall("setting.Shop.queryShop", new WdtUltimatePager(0, 10), {})
 ```
 
+**奇门自定义**
+
 ``` typescript
-import { WdtQimenClient, WdtQimenPager } from "https://deno.land/wdt_sdk/@0.2.0/mod.ts";
+import { WdtQimenClient } from "https://deno.land/wdt_sdk/@0.2.0/mod.ts";
 
 const client = new WdtQimenClient({
     customerId: "your_wdt_customer_id",
@@ -36,3 +40,15 @@ const { response: { status, data } } = await client.execute(request);
 console.log(status, data);
 ```
 
+**奇门官方**
+
+``` typescript
+import { TopClient } from "https://deno.land/wdt_sdk/@0.2.0/mod.ts";
+
+const client = new TopClient({
+    appKey: "your_wdt_app_key",
+    appSecret: "your_wdt_app_secret",
+    url: "",
+    targetAppKey: "your_wdt_target_app_key",
+});
+```
